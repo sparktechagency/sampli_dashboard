@@ -1,29 +1,29 @@
-import React, { useState } from "react";
-import { Steps, Button, Modal, Rate, Tabs, Upload, Progress, Tag } from "antd";
 import {
-  ShoppingCartOutlined,
+  CarOutlined,
   CheckCircleOutlined,
+  DeliveredProcedureOutlined,
   InboxOutlined,
   PlusOutlined,
-  CarOutlined,
-  DeliveredProcedureOutlined,
+  ShoppingCartOutlined,
 } from "@ant-design/icons";
-import { MdArrowBack, MdEmail, MdOutlineMarkEmailUnread } from "react-icons/md";
-import toast from "react-hot-toast";
+import { Button, Modal, Progress, Rate, Steps, Tabs, Tag, Upload } from "antd";
 import Dragger from "antd/es/upload/Dragger";
-import ReviewsVideo from "./ReviewsVideo";
+import { Contact } from "lucide-react";
+import { useState } from "react";
+import toast from "react-hot-toast";
 import { GoLinkExternal } from "react-icons/go";
+import { MdArrowBack, MdEmail, MdOutlineMarkEmailUnread } from "react-icons/md";
 import {
   useGetSingleOfferCampaignQuery,
   useGetSingleOfferCampaignTrackQuery,
 } from "../../../../../../Redux/sampler/campaignApis";
-import Loader from "../../../../../loader/Loader";
 import {
   useCreateReviewMutation,
   useCreateUploadApisMutation,
 } from "../../../../../../Redux/sampler/videoUploadApis";
-import { Contact } from "lucide-react";
+import Loader from "../../../../../loader/Loader";
 import ImageReview from "./ImageReview";
+import ReviewsVideo from "./ReviewsVideo";
 
 const { Step } = Steps;
 
@@ -78,8 +78,9 @@ const OfferOrderDetails = ({ setIsClicked, id }) => {
       console.log(presignedResponse);
 
       const presignedUrl = presignedResponse.uploadURL;
-      const finalVideoUrl = `https://sampli-bucket101.s3.us-west-2.amazonaws.com/${presignedResponse.fileName}`;
 
+      const finalVideoUrl = presignedUrl?.split("?")[0];
+      // console.log(finalVideoUrl)
       setFinalVideoUrl(finalVideoUrl);
 
       await uploadToS3(presignedUrl, videoFile, finalVideoUrl);
