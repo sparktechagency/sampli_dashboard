@@ -75,8 +75,6 @@ const OfferOrderDetails = ({ setIsClicked, id }) => {
         fileCategory: "review_video",
       };
       const presignedResponse = await createPresignedUrl({ data }).unwrap();
-      console.log(presignedResponse);
-
       const presignedUrl = presignedResponse.uploadURL;
 
       const finalVideoUrl = presignedUrl?.split("?")[0];
