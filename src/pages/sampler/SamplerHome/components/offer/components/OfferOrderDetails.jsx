@@ -9,7 +9,7 @@ import {
 import { Button, Modal, Progress, Rate, Steps, Tabs, Tag, Upload } from "antd";
 import Dragger from "antd/es/upload/Dragger";
 import { Contact } from "lucide-react";
-import { useState } from "react";
+import React, { useState } from "react";
 import toast from "react-hot-toast";
 import { GoLinkExternal } from "react-icons/go";
 import { MdArrowBack, MdEmail, MdOutlineMarkEmailUnread } from "react-icons/md";
@@ -28,7 +28,7 @@ import ReviewsVideo from "./ReviewsVideo";
 const { Step } = Steps;
 
 const OfferOrderDetails = ({ setIsClicked, id }) => {
-  const [isModalOpen, setIsModalOpen] = useState(false);
+  const [isModalOpen, setIsModalOpen] = React.useState(false);
   const [rating, setRating] = useState(0);
   const [description, setDescription] = useState("");
   const [thumbnailUrl, setThumbnailUrl] = useState("");
@@ -103,7 +103,9 @@ const OfferOrderDetails = ({ setIsClicked, id }) => {
 
         formData.append("data", JSON.stringify(data));
 
-        await createReview(formData).unwrap();
+        const res = await createReview(formData).unwrap();
+        console.log(res)
+        alert("wait")
         setIsModalOpen(false);
         toast.success("Review submitted successfully!");
 
@@ -113,7 +115,7 @@ const OfferOrderDetails = ({ setIsClicked, id }) => {
         setVideoFile(null);
         setFinalVideoUrl("");
         setUploadProgress(0);
-        window.location.reload();
+        // window.location.reload();
       } catch (error) {
         toast.error("Failed to submit review");
         console.error("Review submission error:", error);
