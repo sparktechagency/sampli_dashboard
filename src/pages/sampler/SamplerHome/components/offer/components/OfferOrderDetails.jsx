@@ -104,8 +104,7 @@ const OfferOrderDetails = ({ setIsClicked, id }) => {
         formData.append("data", JSON.stringify(data));
 
         const res = await createReview(formData).unwrap();
-        // console.log(res)
-        // alert("wait")
+        // console.log(res)s
         setIsModalOpen(false);
         toast.success("Review submitted successfully!");
 
