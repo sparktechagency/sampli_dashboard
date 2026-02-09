@@ -1,10 +1,10 @@
-import React, { useState } from "react";
+import { Card, Empty, Pagination } from "antd";
+import React from "react";
 import { FaRegComment, FaTruck } from "react-icons/fa";
 import { FiDollarSign } from "react-icons/fi";
 import { GrGift } from "react-icons/gr";
 import { IoIosStarOutline } from "react-icons/io";
 import { useGetProductsNotificationsQuery } from "../../../../../../Redux/sampler/notificationsApis";
-import { Card, Empty, Pagination } from "antd";
 
 const icons = {
   review: <GrGift className="w-5 mr-2 mt-1" />,
@@ -16,12 +16,10 @@ const icons = {
 
 const NotificationCard = ({ notification }) => {
   const product = notification.data?.product;
-
   return (
     <div
-      className={`flex justify-between border p-4 rounded-lg mb-4 text-gray-700 ${
-        notification.isRead ? "bg-white" : "bg-gray-50"
-      }`}
+      className={`flex justify-between border border-gray-200 p-4 rounded-lg mb-4 text-gray-700 ${notification.isRead ? "bg-white" : "bg-gray-50"
+        }`}
     >
       {icons[notification.type] || null}
 
@@ -30,7 +28,9 @@ const NotificationCard = ({ notification }) => {
           <div className="flex items-center gap-3">
             <div className="font-medium">{notification.title}</div>
           </div>
-          <div className="text-gray-400 text-sm"></div>
+          <div className="text-gray-400 text-sm">
+            <h1 className='text-xs'>{new Date(notification.createdAt).toLocaleString()}</h1>
+          </div>
         </section>
 
         <div className="flex justify-between items-start mt-3">
@@ -70,7 +70,7 @@ const NotificationCard = ({ notification }) => {
 };
 
 const NotificationsSampler = () => {
-  const [page, setPage] = useState(1);
+  const [page, setPage] = React.useState(1);
   const { data: notificationData, isLoading } =
     useGetProductsNotificationsQuery({
       limit: 10,

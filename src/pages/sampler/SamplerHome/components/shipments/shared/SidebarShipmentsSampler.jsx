@@ -65,17 +65,15 @@ const SidebarShipmentsSampler = () => {
       )}
 
       <div
-        className={`fixed md:relative z-30 h-screen transition-all duration-300 ease-in-out ${
-          isOpen
+        className={`fixed md:relative z-30 h-screen transition-all duration-300 ease-in-out ${isOpen
             ? 'translate-x-0 w-64'
             : '-translate-x-full w-0 md:translate-x-0 md:w-16'
-        }`}
+          }`}
       >
         <div className="h-full bg-white bg-opacity-90 backdrop-blur-sm">
           <div
-            className={`text-xl mb-5 pl-6 py-4 transition-opacity duration-200 ${
-              isOpen ? 'opacity-100' : 'opacity-0 md:opacity-0'
-            }`}
+            className={`text-xl mb-5 pl-6 py-4 transition-opacity duration-200 ${isOpen ? 'opacity-100' : 'opacity-0 md:opacity-0'
+              }`}
           >
             Shopping & Alerts
           </div>
@@ -87,17 +85,14 @@ const SidebarShipmentsSampler = () => {
                 key={index}
                 onClick={handleLinkClick}
                 className={({ isActive }) =>
-                  `flex items-center text-sm py-3 rounded-3xl my-1 ${
-                    isOpen ? 'pl-6' : 'justify-center'
-                  } hover:bg-gray-500 cursor-pointer hover:text-white ${
-                    isActive ? 'text-blue-600' : 'text-gray-500'
+                  `flex items-center text-sm py-3 rounded-3xl my-1 ${isOpen ? 'pl-6' : 'justify-center'
+                  } hover:bg-gray-500 cursor-pointer hover:text-white ${isActive ? 'text-blue-600' : 'text-gray-500'
                   }`
                 }
               >
                 <span
-                  className={`text-xl hover:text-blue-600 ${
-                    isOpen ? 'mr-4 mt-0' : ''
-                  }`}
+                  className={`text-xl hover:text-blue-600 ${isOpen ? 'mr-4 mt-0' : ''
+                    }`}
                 >
                   {item.icon}
                 </span>

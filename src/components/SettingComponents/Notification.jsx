@@ -1,5 +1,5 @@
-import React, { useEffect, useState, useCallback } from "react";
 import { Card, Switch, Typography } from "antd";
+import { useCallback, useEffect, useState } from "react";
 import toast from "react-hot-toast";
 import {
   useNotificationSettingQuery,

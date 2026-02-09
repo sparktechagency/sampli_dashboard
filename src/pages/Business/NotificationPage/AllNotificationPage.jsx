@@ -1,19 +1,19 @@
-import React, { useState } from "react";
+import { Button, Card, Empty, Tooltip } from "antd";
+import React from "react";
+import toast from "react-hot-toast";
+import { CiSettings } from "react-icons/ci";
 import {
   FaBell,
-  FaStar,
   FaBullhorn,
   FaDollarSign,
   FaShoppingCart,
+  FaStar,
+  FaThumbsUp,
   FaTruck,
   FaVideo,
-  FaThumbsUp,
 } from "react-icons/fa";
-import { Button, Card, Empty, Tooltip } from "antd";
-import { CiSettings } from "react-icons/ci";
 import { Link } from "react-router-dom";
 import { useNotificationPageQuery } from "../../../Redux/businessApis/business_notifications/notificationPageApis";
-import toast from "react-hot-toast";
 
 const getIcon = (type) => {
   switch (type) {
@@ -54,13 +54,14 @@ const getIcon = (type) => {
 // };
 
 const AllNotificationPage = () => {
-  const [limit, setLimit] = useState(10)
-  const [type, setType] = useState("")
+  const [limit, setLimit] = React.useState(10)
+  const [type, setType] = React.useState("")
   const { data: notificationRes, isLoading: notificationLoading, isFetching } = useNotificationPageQuery({
     limit,
     sortOrder: "desc",
     ...(type !== "" && { type })
   })
+  console.log(notificationRes)
   // LIKE: 'likeOnPost',
   // COMMENT: 'commentOnPost',
   // MENTION: 'mention',
@@ -109,7 +110,7 @@ const AllNotificationPage = () => {
   ];
 
   return (
-    <div className="w-full h-[calc(100vh-10rem)] container mx-auto p-4">
+    <div className="w-full min-h-[calc(100vh-10rem)] container mx-auto p-4">
       {/* Header */}
       <div className="flex justify-between items-center mb-4">
         <h1 className="text-2xl font-semibold">Notifications</h1>
@@ -157,6 +158,7 @@ const AllNotificationPage = () => {
                 <h3 className="font-medium">{item?.title}</h3>
                 <p className="text-gray-600">{item?.message}</p>
 
+
                 {/* <div className="flex gap-2">
                   {getActions(item?.type, item?.isRead).map((action, actionIndex) => (
                     <Button
@@ -172,7 +174,7 @@ const AllNotificationPage = () => {
                   ))}
                 </div> */}
               </div>
-              <span className="text-gray-400 text-sm">{item?.time}</span>
+              <time className="text-xs text-gray-500">{new Date(item?.createdAt).toLocaleString()}</time>
             </div>
           )) : <Empty description="No notifications" />}
         </div>

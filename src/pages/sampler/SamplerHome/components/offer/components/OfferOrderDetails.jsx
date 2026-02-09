@@ -384,12 +384,12 @@ const OfferOrderDetails = ({ setIsClicked, id }) => {
                   )}
                 </div>
                 <Button
-                  // disabled={
-                  //   geSingleCampaignOffer?.data?.status !== "Processing"
-                  // }
+                  disabled={
+                    geSingleCampaignOffer?.data?.status?.toUpperCase() !== 'DELIVERED'
+                  }
                   className={
-                    geSingleCampaignOffer?.data?.status !== "Processing" &&
-                    "!bg-blue-500 !text-white"
+                    geSingleCampaignOffer?.data?.status?.toUpperCase() !== 'DELIVERED' &&
+                    "!bg-gray-200 !text-black"
                   }
                   onClick={() => {
                     showModal(geSingleCampaignOffer?.data)
