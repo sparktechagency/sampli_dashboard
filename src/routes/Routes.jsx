@@ -54,9 +54,11 @@
 
 
 
-import { lazy, Suspense } from "react";
+import React, { lazy, Suspense } from "react";
+
 import { createBrowserRouter } from "react-router-dom";
 import Layout from "../components/Layout";
+import Loader from "../pages/loader/Loader.jsx";
 
 const Otp = lazy(() => import("../pages/auth/Otp.jsx"));
 const Login = lazy(() => import("../pages/auth/Login.jsx"));
@@ -86,11 +88,12 @@ const BusinessSendOtp = lazy(() =>
 const businessRoutes = lazy(() => import("./businessRoutes.jsx"));
 const samplerRoutes = lazy(() => import("./samplerRoutes.jsx"));
 
+console.log(React.version);
 
 export const router = createBrowserRouter([
   {
     element: (
-      <Suspense fallback={<div>Loading...</div>}>
+      <Suspense fallback={<div><Loader></Loader></div>}>
         <Layout />
       </Suspense>
     ),
