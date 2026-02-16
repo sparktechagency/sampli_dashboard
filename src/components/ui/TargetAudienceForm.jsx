@@ -1,8 +1,8 @@
-import React, { useEffect, useState, useCallback, useMemo } from 'react';
-import { Form, Input, Select, DatePicker, Checkbox } from 'antd';
-import { useDispatch, useSelector } from 'react-redux';
-import toast from 'react-hot-toast';
+import { Checkbox, DatePicker, Form, Input, Select } from 'antd';
 import dayjs from 'dayjs';
+import React, { useCallback, useEffect, useMemo, useState } from 'react';
+import toast from 'react-hot-toast';
+import { useDispatch, useSelector } from 'react-redux';
 import { setCampaignData } from '../../Redux/slices/CampaingSlice';
 
 const { Option } = Select;
@@ -145,10 +145,13 @@ const TargetAudienceForm = () => {
           </Select>
         </Form.Item>
 
-        <Form.Item label="Number of Reviewers" required>
+        <Form.Item label="Number of Reviewers"
+          rules={[{ required: true, message: "Please enter number of reviewers", min: 1 }]}
+        >
           <Input
             size="large"
             type="number"
+
             placeholder="Number of reviewers"
             value={formData.numberOfReviewers}
             onChange={(e) => handleChange('numberOfReviewers', e.target.value)}

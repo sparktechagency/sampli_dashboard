@@ -1,5 +1,5 @@
 import { Card, Switch, Typography } from "antd";
-import { useCallback, useEffect, useState } from "react";
+import React, { useCallback, useEffect, useState } from "react";
 import toast from "react-hot-toast";
 import {
   useNotificationSettingQuery,
@@ -10,7 +10,7 @@ const { Title } = Typography;
 
 function Notification() {
 
-  const [settings, setSettings] = useState({
+  const [settings, setSettings] = React.useState({
     general: false,
     customerNotification: false,
     orderNotification: false,
