@@ -55,7 +55,7 @@ import React, { lazy, Suspense } from "react";
 
 import { createBrowserRouter } from "react-router-dom";
 import Layout from "../components/Layout";
-import SpinLoader from "../pages/loader/spinLoader.jsx";
+import LogoSpinLoader from "../pages/loader/LogoSpinLoader.jsx";
 
 const Otp = lazy(() => import("../pages/auth/Otp.jsx"));
 const Login = lazy(() => import("../pages/auth/Login.jsx"));
@@ -91,7 +91,7 @@ export const router = createBrowserRouter([
       <Suspense
         fallback={
           <div>
-            <SpinLoader  />
+            <LogoSpinLoader/>
           </div>
         }
       >
