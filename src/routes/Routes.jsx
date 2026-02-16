@@ -58,7 +58,8 @@ import Layout from "../components/Layout";
 import LogoSpinLoader from "../pages/loader/LogoSpinLoader.jsx";
 
 const Otp = lazy(() => import("../pages/auth/Otp.jsx"));
-const Login = lazy(() => import("../pages/auth/Login.jsx"));
+// const Login = lazy(() => import("../pages/auth/Login.jsx"));
+import Login from "../pages/auth/Login.jsx";
 const Register = lazy(() => import("../pages/auth/Register.jsx"));
 const ResetPassword = lazy(() => import("../pages/auth/ResetPassword.jsx"));
 const ForgetPassword = lazy(() => import("../pages/auth/ForgetPassword.jsx"));
@@ -91,7 +92,7 @@ export const router = createBrowserRouter([
       <Suspense
         fallback={
           <div>
-            <LogoSpinLoader/>
+            <LogoSpinLoader />
           </div>
         }
       >
@@ -100,6 +101,8 @@ export const router = createBrowserRouter([
     ),
 
     children: [
+      businessRoutes,
+      samplerRoutes,
       // shared/auth routes
       { path: "/", element: <Login /> },
       { path: "/login", element: <Login /> },
