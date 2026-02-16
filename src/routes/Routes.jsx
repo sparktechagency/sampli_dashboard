@@ -60,6 +60,8 @@ import LogoSpinLoader from "../pages/loader/LogoSpinLoader.jsx";
 const Otp = lazy(() => import("../pages/auth/Otp.jsx"));
 // const Login = lazy(() => import("../pages/auth/Login.jsx"));
 import Login from "../pages/auth/Login.jsx";
+import { businessRoutes } from "./businessRoutes.jsx";
+import { samplerRoutes } from "./samplerRoutes.jsx";
 const Register = lazy(() => import("../pages/auth/Register.jsx"));
 const ResetPassword = lazy(() => import("../pages/auth/ResetPassword.jsx"));
 const ForgetPassword = lazy(() => import("../pages/auth/ForgetPassword.jsx"));
@@ -72,17 +74,17 @@ const BusinessInfoForm = lazy(() => import("../components/ui/BusinessInfoForm.js
 const ChooseRole = lazy(() => import("../pages/sampler/chooseRole/ChooseRole.jsx"));
 const Signup = lazy(() => import("../pages/sampler/signup/Signup.jsx"));
 const SignUpOtp = lazy(() => import("../pages/sampler/signup/SignUpOtp.jsx"));
-const SignUpMoreInformation = lazy(
-  () => import("../pages/sampler/signup/SignUpMoreInformation.jsx"),
+const SignUpMoreInformation = lazy(() =>
+  import("../pages/sampler/signup/SignUpMoreInformation.jsx")
 );
-const SelectAllCategories = lazy(
-  () => import("../pages/sampler/signup/selectCategories/SelectAllCategories.jsx"),
+const SelectAllCategories = lazy(() =>
+  import("../pages/sampler/signup/selectCategories/SelectAllCategories.jsx")
 );
 
 const BusinessSendOtp = lazy(() => import("../pages/Business/business_auth/BusinessSendOtp.jsx"));
 
-const businessRoutes = lazy(() => import("./businessRoutes.jsx"));
-const samplerRoutes = lazy(() => import("./samplerRoutes.jsx"));
+// const businessRoutes = lazy(() => import("./businessRoutes.jsx"));
+// const samplerRoutes = lazy(() => import("./samplerRoutes.jsx"));
 
 console.log(React.version);
 
