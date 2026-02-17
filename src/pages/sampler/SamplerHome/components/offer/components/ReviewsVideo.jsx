@@ -54,7 +54,7 @@ const ReviewsVideo = ({ showModal, product, status }) => {
                   <div>
                     <div className="flex items-center gap-1">
                       <span className="font-medium">
-                        {review?.reviewer?.name}
+                        {review?.reviewer?.name} origi
                       </span>
                       <span className="text-gray-500 text-sm">
                         @{review?.reviewer?.username}

@@ -17,8 +17,13 @@ const AddYourSocials = ({ prev, next }) => {
   const [updateProfile, { isLoading }] = useUpdateProfileApisMutation();
 
   const handleFormSubmit = async (values) => {
+    console.log(values?.instagram )
+    if (!values?.instagram  && !values?.twitter  && !values?.tiktok  && !values?.youtube ) {
+      next();
+      return;
+    }
     const hasAtLeastOneSocial = Object.values(values).some((val) =>
-      val?.trim()
+      val?.trim(),
     );
     if (!hasAtLeastOneSocial) {
       toast.error("Please add at least one social media username.");
