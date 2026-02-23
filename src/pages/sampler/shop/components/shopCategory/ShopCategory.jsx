@@ -71,7 +71,7 @@ const CategoryCarousel = () => {
                         backgroundRepeat: 'no-repeat',
                       }}
                       className="flex flex-col items-center overflow-hidden justify-center w-52 h-52 
-                      p-4 border-gray-300 rounded-full border cursor-pointer hover:shadow-lg transition"
+                      p-4 border-gray-300 rounded-full cursor-pointer transition"
                     >
                       <img
                         src={category.category_image}

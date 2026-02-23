@@ -41,7 +41,7 @@ const SamplerReviewer = () => {
   };
 
   return (
-    <div className="min-h-screen bg-gradient-to-br  p-4">
+    <div className="min-h-screen bg-gradient-to-br p-4">
       <div className="responsive-width mx-auto">
         {/* Header */}
         <div className="bg-white rounded-2xl shadow-xl p-6 mb-6 border border-gray-100">

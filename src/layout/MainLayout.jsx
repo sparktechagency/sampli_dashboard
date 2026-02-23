@@ -24,7 +24,7 @@ const MainLayout = () => {
   return (
     <div className="h-screen">
       <Header />
-      <div className="xl:h-[calc(100%-64px)] xl:overflow-hidden xl:flex bg-[var(--black-100)]">
+      <div className="xl:h-[calc(100%-64px)] xl:overflow-hidden xl:flex bg-(--black-100)">
         {/* Sidebar */}
 
         <div className="sidebar scrollbar xl:block hidden sm:w-[200px] xl:w-[300px] h-full p-4 overflow-y-scroll bg-[#f8f8fa]">

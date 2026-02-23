@@ -322,13 +322,13 @@ function Header() {
                   to="/sampler/checkout"
                   className="hover:scale-110 transition-all"
                 >
-                  <ShoppingCartSampler className="hover:text-black  transition-all" />
+                  <ShoppingCartSampler className="hover:text-black text-gray-600! transition-all" />
                 </Link>
                 <Link
                   to="/sampler/campaign/shipments/notifications"
                   className="hover:scale-110 transition-all"
                 >
-                  <IoMdNotificationsOutline className="hover:text-black text-gray-400 transition-all" />
+                  <IoMdNotificationsOutline className="hover:text-black text-gray-600! transition-all" />
                 </Link>
                 <Dropdown
                   overlay={menuSampler}

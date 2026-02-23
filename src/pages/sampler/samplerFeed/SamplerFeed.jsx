@@ -1,26 +1,6 @@
-import React, { useCallback, useEffect, useMemo, useState } from "react";
-import {
-  Avatar,
-  Button,
-  Input,
-  Segmented,
-  Rate,
-  Modal,
-  Dropdown,
-  Tooltip,
-  Upload,
-  Spin,
-  Skeleton,
-  Empty,
-  Card,
-} from "antd";
-import {
-  ShareAltOutlined,
-  HeartOutlined,
-  HeartFilled,
-  MessageOutlined,
-  SendOutlined,
-} from "@ant-design/icons";
+import React, { useCallback, useEffect, useState } from "react";
+import { Avatar, Button, Segmented, Modal, Empty, Card } from "antd";
+import { ShareAltOutlined } from "@ant-design/icons";
 import { Link } from "react-router-dom";
 import followingInactiveLogo from "../../../assets/feedLogo/following.svg";
 import followingActiveLogo from "../../../assets/feedLogo/followingActive.svg";
@@ -28,37 +8,29 @@ import newLogo from "../../../assets/feedLogo/new.svg";
 import newActiveLogo from "../../../assets/feedLogo/newActive.svg";
 import popularActiveLogo from "../../../assets/feedLogo/popularActive.svg";
 import popularInActiveLogo from "../../../assets/feedLogo/popularInactive.svg";
-import { useCategorySectionApisQuery } from "../../../Redux/sampler/categoryApis";
 import {
-  useCreateCommentMutation,
   useGetAllReviewQuery,
   useGetReviewerLikersQuery,
-  useChangeLikesMutation,
-  useGetReviewerCommentsQuery,
-  usePostCommentLikesMutation,
-  useGetCommentsRepliesQuery,
   usePostCommentRepliesMutation,
 } from "../../../Redux/sampler/reviewApis";
-import { useAddToCartMutation } from "../../../Redux/sampler/cartApis";
 import { useGetProfileApisQuery } from "../../../Redux/sampler/profileApis";
 import { usePostFollowUnfollowMutation } from "../../../Redux/sampler/followUnfollowApis";
-import Spinner from "../../../components/ui/Spinner";
 import toast from "react-hot-toast";
 import { CustomSkeleton } from "./CustomSkeleton";
 import ReviewPost from "./ReviewPost";
-import { frontendUrl, url } from "../../../Redux/main/server";
-import logo from "../../../assets/logo/logo.svg"
+import { frontendUrl } from "../../../Redux/main/server";
+import logo from "../../../assets/logo/logo.svg";
 import FeedCategorySection from "./FeedCategorySection";
-import SidebarHome from './SidebarHome';
-import "./Empty.css"
+import SidebarHome from "./SidebarHome";
+import "./Empty.css";
+import EmptyData from "./EmptyData";
 const SamplerFeed = () => {
-
   const [activeCategory, setActiveCategory] = useState("");
 
-  const [changeFollowUnfollow, { isLoading: isFollowing }] = usePostFollowUnfollowMutation();
+  const [changeFollowUnfollow, { isLoading: isFollowing }] =
+    usePostFollowUnfollowMutation();
 
-  const { data: getMyProfile, isLoading } =
-    useGetProfileApisQuery();
+  const { data: getMyProfile, isLoading } = useGetProfileApisQuery();
 
   const profileData = getMyProfile?.data;
 
@@ -75,65 +47,66 @@ const SamplerFeed = () => {
   const users = getReviewerLikers?.data?.result;
   const [activeTab, setActiveTab] = useState("");
   const [showShareModal, setShowShareModal] = useState(false);
-  const [reviewLimit, setReviewLimit] = useState(3)
+  const [reviewLimit, setReviewLimit] = useState(3);
 
-  const { data: reviewList, isLoading: reviewLoading, isFetching } = useGetAllReviewQuery({
+  const {
+    data: reviewList,
+    isLoading: reviewLoading,
+    isFetching,
+  } = useGetAllReviewQuery({
     category: activeCategory,
     following: activeTab == "following" ? true : undefined,
     sortBy: activeTab != "popular" ? undefined : "totalView",
     sortOrder: activeTab != "popular" ? undefined : "desc",
-    limit: reviewLimit
+    limit: reviewLimit,
   });
 
   const posts = reviewList?.data?.data?.result;
-  const [loading, setLoading] = useState(false)
+  const [loading, setLoading] = useState(false);
 
   const handleFollow = async (id) => {
     try {
-      const res = await changeFollowUnfollow(id).unwrap()
+      const res = await changeFollowUnfollow(id).unwrap();
       if (!res.success) {
-        throw new Error(res.message)
+        throw new Error(res.message);
       }
-      toast.success(res?.message)
+      toast.success(res?.message);
     } catch (error) {
-      toast.error(error?.data?.message || error?.message || "Something went wrong")
+      toast.error(
+        error?.data?.message || error?.message || "Something went wrong",
+      );
     }
   };
 
   const handleScroll = useCallback(() => {
-    if (loading || isFetching) return
-    if (reviewList?.data?.data?.meta?.total <= reviewLimit) return
+    if (loading || isFetching) return;
+    if (reviewList?.data?.data?.meta?.total <= reviewLimit) return;
 
-    const scrollTop =
-      window.pageYOffset || document.documentElement.scrollTop
+    const scrollTop = window.pageYOffset || document.documentElement.scrollTop;
 
-    const windowHeight = window.innerHeight
-    const fullHeight = document.documentElement.scrollHeight
+    const windowHeight = window.innerHeight;
+    const fullHeight = document.documentElement.scrollHeight;
 
     if (scrollTop + windowHeight >= fullHeight - 200) {
-      setLoading(true)
-      setReviewLimit(prev => prev + 8)
+      setLoading(true);
+      setReviewLimit((prev) => prev + 8);
     }
-  }, [loading, isFetching])
+  }, [loading, isFetching]);
 
   useEffect(() => {
-    window.scrollTo(0, 0)
-  }, [])
+    window.scrollTo(0, 0);
+  }, []);
 
   useEffect(() => {
-    window.addEventListener('scroll', handleScroll)
-    return () => window.removeEventListener('scroll', handleScroll)
-  }, [handleScroll])
-
+    window.addEventListener("scroll", handleScroll);
+    return () => window.removeEventListener("scroll", handleScroll);
+  }, [handleScroll]);
 
   useEffect(() => {
     if (!isFetching) {
-      setLoading(false)
+      setLoading(false);
     }
-  }, [isFetching])
-
-
-
+  }, [isFetching]);
 
   const [isModalOpenLike, setIsModalOpenLike] = useState(false);
   const handleOkLike = () => {
@@ -142,7 +115,6 @@ const SamplerFeed = () => {
   const handleCancelLike = () => {
     setIsModalOpenLike(false);
   };
-
 
   const handleAllComments = (id) => {
     setComments((prev) => !prev);
@@ -156,7 +128,6 @@ const SamplerFeed = () => {
       setShowRepliesForComment(commentId);
     }
   };
-
 
   const handleReply = async (commentId) => {
     try {
@@ -173,7 +144,7 @@ const SamplerFeed = () => {
       navigator.share({
         title: post?.product?.name || "Event",
         text: "Check this out!",
-        url: `${frontendUrl}/sampler/shop/category/${encodeURIComponent(post?.product?.name || '')}/${post?.product?._id}`,
+        url: `${frontendUrl}/sampler/shop/category/${encodeURIComponent(post?.product?.name || "")}/${post?.product?._id}`,
       });
     } else {
       alert("Share not supported on this device");
@@ -182,74 +153,96 @@ const SamplerFeed = () => {
 
   if (reviewLoading) {
     return (
-      <div className="w-full h-screen bg-white animate-pulse flex items-center justify-center" >
-        <img className="w-16 h-16 object-contain animate-spin animation: 2s linear infinite" src={logo} alt="sampli-logo" />
+      <div className="w-full h-screen bg-white animate-pulse flex items-center justify-center">
+        <img
+          className="w-16 h-16 object-contain animate-spin animation: 2s linear infinite"
+          src={logo}
+          alt="sampli-logo"
+        />
       </div>
-    )
+    );
   }
-
   return (
-    <div
-      className="container mx-auto !mt-2 !mb-20 ">
+    <div className="container h-[calc(100vh-16rem)] overflow-hidden mx-auto mt-2! mb-20! ">
       <div className="bg-white flex justify-between items-start gap-10 max-lg:flex-col">
-        {/* left side */}
-        <div className="grid grid-cols-8 gap-4">
-          <Card
-            loading={isLoading}
-            className="!min-w-1/3 !p-0 !col-span-2 hidden lg:block max-lg:!w-full"
-            style={{
-              position: 'sticky',
-              top: '70px',
-              alignSelf: 'flex-start',
-              maxHeight: 'calc(100vh - 40px)',
-              overflowY: 'auto'
-            }}
-          >
-            <div className="flex items-center justify-between ">
-              <div className="flex items-center gap-4 ">
-                <Avatar style={{ border: '1px solid gray', padding: '4px' }} size={60} src={`${profileData?.profile_image}`} />
-                <div className="mt-3 flex items-start flex-col">
-                  <span className="text-lg font-semibold">{profileData?.name}</span>
-                  <small className="text-gray-500 text-sm">
-                    @{profileData?.username}
-                  </small>
+        <div className="grid  grid-cols-8 gap-4">
+          {/* left side */}
+          <div className="h-[calc(100vh-16rem)] relative bg-[#F5F5F5]/20 border border-gray-200 overflow-hidden rounded-2xl w-full min-w-1/3 p-0! col-span-2 hidden lg:block max-lg:w-full">
+            <div className="flex flex-col gap-4">
+              {/* Profile Image */}
+              <div className="flex items-center gap-4 p-4">
+                <div className="flex w-24 h-24 rounded-2xl border border-gray-200 justify-center">
+                  <img
+                    className="w-full h-full mx-auto border-2 border-gray-200 rounded-full"
+                    src={profileData?.profile_image}
+                    alt={profileData?.name}
+                  />
                 </div>
-              </div>
-              <Link to={"/sampler/my-profile"} className="mb-5">
-                <Button type="default">My Profile</Button>
-              </Link>
-            </div>
 
-            <div className="flex justify-between text-center">
-              <div>
-                <div className="font-semibold ">
-                  {profileData?.totalFollowers}
+                {/* Name and Username */}
+                <div className="text-center">
+                  <div className="font-bold text-lg">
+                    {profileData?.name || "Your Name"}
+                  </div>
+                  <div className="text-gray-500">
+                    @{profileData?.username || "username"}
+                  </div>
                 </div>
-                <div className="text-gray-500 ">Reviews</div>
               </div>
-              <div>
-                <div className="font-semibold  ">
-                  {profileData?.totalFollowing}
+              {/* Divider */}
+              <div className="border-t border-gray-200"></div>
+
+              {/* Stats */}
+              <div className="flex justify-around text-center">
+                <div>
+                  <div className="font-semibold">
+                    {profileData?.totalFollowers || "0"}
+                  </div>
+                  <div className="text-gray-500 text-sm">Followers</div>
                 </div>
-                <div className="text-gray-500 ">Followers</div>
+                <div>
+                  <div className="font-semibold">
+                    {profileData?.totalFollowing || "0"}
+                  </div>
+                  <div className="text-gray-500 text-sm">Following</div>
+                </div>
+                <div>
+                  <div className="font-semibold">
+                    ${profileData?.totalReferralSales || "0"}
+                  </div>
+                  <div className="text-gray-500 text-sm">Sales</div>
+                </div>
               </div>
-              <div>
-                <div className="font-semibold  ">
-                  {profileData?.totalReferralSales}
-                </div>
-                <div className="text-gray-500 ">Referrals</div>
+
+              {/* Divider */}
+              <div className="border-t border-gray-200"></div>
+
+              {/* Edit Profile Button */}
+              <div className="flex justify-center absolute bottom-0 left-0 w-full! ">
+                <Link
+                  className="w-full!"
+                  to="/sampler/settings/basic-details-settings-sampler"
+                >
+                  <Button
+                    size="large"
+                    type="primary"
+                    className="w-full! rounded-none!"
+                  >
+                    Edit Profile
+                  </Button>
+                </Link>
               </div>
             </div>
-          </Card>
-          {/* right side */}
-          <div className="w-full !col-span-12 lg:!col-span-4">
+          </div>
+          {/* middle  */}
+          <div className="w-full h-[calc(100vh-16rem)] scrollbar-none overflow-y-auto col-span-12! lg:col-span-4!">
             {/* Feed Segmented */}
-            <div className="!mt-5">
+            <div className="mt-5!">
               <Segmented
                 value={activeTab || "new"}
                 onChange={(value) => setActiveTab(value === "new" ? "" : value)}
                 className="w-full border border-gray-200 rounded-lg p-2"
-                size='large'
+                size="large"
                 options={[
                   {
                     label: (
@@ -268,9 +261,15 @@ const SamplerFeed = () => {
                     label: (
                       <div className="flex gap-2 items-center">
                         {activeTab === "following" ? (
-                          <img src={followingActiveLogo} alt="following active" />
+                          <img
+                            src={followingActiveLogo}
+                            alt="following active"
+                          />
                         ) : (
-                          <img src={followingInactiveLogo} alt="following inactive" />
+                          <img
+                            src={followingInactiveLogo}
+                            alt="following inactive"
+                          />
                         )}
                         <span>Following</span>
                       </div>
@@ -283,7 +282,10 @@ const SamplerFeed = () => {
                         {activeTab === "popular" ? (
                           <img src={popularActiveLogo} alt="popular active" />
                         ) : (
-                          <img src={popularInActiveLogo} alt="popular inactive" />
+                          <img
+                            src={popularInActiveLogo}
+                            alt="popular inactive"
+                          />
                         )}
                         <span>Popular</span>
                       </div>
@@ -294,15 +296,16 @@ const SamplerFeed = () => {
               />
             </div>
             {/* Category Pills */}
-            <FeedCategorySection setActiveCategory={setActiveCategory} activeCategory={activeCategory} />
+            <FeedCategorySection
+              setActiveCategory={setActiveCategory}
+              activeCategory={activeCategory}
+            />
             {/* Skeleton */}
-            {reviewLoading && (
-              <CustomSkeleton />
-            )}
+            {reviewLoading && <CustomSkeleton />}
 
             <div>
               {posts?.length == 0 && (
-                <div className="h-screen">
+                <div className="min-h-32 flex items-center justify-center">
                   {/* <div className="outer">
                     <div className="dot"></div>
                     <div className="card">
@@ -315,13 +318,12 @@ const SamplerFeed = () => {
                       <div className="line rightl"></div>
                     </div>
                   </div> */}
-
-                  <Empty image={Empty.PRESENTED_IMAGE_SIMPLE} />
+                  <EmptyData message="No reviews found" />
                 </div>
               )}
             </div>
             {/* Feed Posts */}
-            <div className="!space-y-4 relative w-full">
+            <div className="space-y-4! relative! w-full!">
               {posts?.map((post) => (
                 <ReviewPost
                   post={post}
@@ -336,18 +338,24 @@ const SamplerFeed = () => {
                   isFollowing={isFollowing}
                 />
               ))}
-              {(isFetching || loading || reviewList?.data?.data?.meta?.total > reviewLimit) && <CustomSkeleton isHeight={false} />}
+              {(isFetching ||
+                loading ||
+                reviewList?.data?.data?.meta?.total > reviewLimit) && (
+                <CustomSkeleton isHeight={false} />
+              )}
             </div>
           </div>
-
+          {/* Right side */}
           <div
             style={{
-              position: 'sticky',
-              top: '70px',
-              alignSelf: 'flex-start',
-              maxHeight: 'calc(100vh - 40px)',
-              overflowY: 'auto'
-            }} className="!col-span-2 !divide-y !divide-amber-400 !hidden lg:!block" >
+              position: "sticky",
+              top: "70px",
+              alignSelf: "flex-start",
+              maxHeight: "calc(100vh - 40px)",
+              overflowY: "auto",
+            }}
+            className="col-span-2! divide-y! bg-[#F5F5F5]/20 border border-gray-200 overflow-hidden rounded-2xl h-full hidden! lg:block!"
+          >
             <SidebarHome />
           </div>
         </div>
@@ -386,18 +394,18 @@ const SamplerFeed = () => {
                   key={user?.id}
                   className="flex justify-between items-center space-x-4"
                 >
-                  <div className="flex items-center !space-x-3">
+                  <div className="flex items-center space-x-3!">
                     <Avatar
                       src={user?.profile_image}
                       size={50}
                       className="border-2 border-white"
                     />
                     <div>
-                      <div className="text-sm font-medium flex-grow">
+                      <div className="text-sm font-medium grow">
                         {user?.name}
                       </div>
                       <div className="flex gap-3 justify-center items-center">
-                        <div className="text-sm font-medium flex-grow">
+                        <div className="text-sm font-medium grow">
                           @{user?.username}
                         </div>
                       </div>
@@ -420,5 +428,3 @@ const SamplerFeed = () => {
 };
 
 export default SamplerFeed;
-
-

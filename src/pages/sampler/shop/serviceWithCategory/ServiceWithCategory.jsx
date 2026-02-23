@@ -9,6 +9,7 @@ import {
   useGetProductApisQuery,
 } from "../../../../Redux/sampler/productApis";
 import toast from "react-hot-toast";
+import circleBg from "../../../../assets/circle.png";
 
 const { Search } = Input;
 const { Title, Text } = Typography;
@@ -55,7 +56,7 @@ const ServiceWithCategory = () => {
           <Title level={2}>{name}</Title>
         </div>
 
-        <div className="flex gap-6 mb-6 overflow-x-auto pb-4">
+        <div className="flex gap-6 mb-6 overflow-x-auto  pb-4">
           {isLoading && (
             <div className="flex items-center justify-center">
               <div className="animate-spin rounded-full h-5 w-5 border-b-2 border-gray-900"></div>
@@ -63,17 +64,25 @@ const ServiceWithCategory = () => {
             </div>
           )}
           {categories?.map((category) => (
-            <div key={category?.name} className="px-2 ">
+            <div
+              key={category?.name}
+              className="p-2 flex items-center justify-center"
+            >
               <Badge
+                style={{
+                    backgroundImage: `url(${circleBg})`,
+                    backgroundSize: "contain",
+                    backgroundPosition: "center",
+                    backgroundRepeat: "no-repeat",
+                  }}
                 className={
                   selectedCategory === category?._id
-                    ? " shadow-xl overflow-hidden rounded-4xl  !mt-2"
+                    ? " overflow-hidden rounded-4xl  !mt-2"
                     : ""
                 }
               >
-                <Card
-                  hoverable
-                  className="w-48 text-center cursor-pointer  !border-none"
+                <div
+                  className="w-48 h-48 text-center cursor-pointer rounded-full"
                   bodyStyle={{ padding: "12px" }}
                   onClick={() => setSelectedCategory(category?._id)}
                 >
@@ -85,7 +94,7 @@ const ServiceWithCategory = () => {
                     />
                   </div>
                   <Text>{category?.name}</Text>
-                </Card>
+                </div>
               </Badge>
             </div>
           ))}
@@ -152,7 +161,7 @@ const ServiceWithCategory = () => {
               <Meta
                 onClick={() => {
                   navigate(
-                    `/sampler/shop/category/${product?.name}/${product?._id}`
+                    `/sampler/shop/category/${product?.name}/${product?._id}`,
                   );
                 }}
                 title={product?.name}
@@ -171,9 +180,6 @@ const ServiceWithCategory = () => {
                       <span className="text-xl font-semibold">
                         ${product?.price}
                       </span>
-                      {/* <span className="text-gray-500 line-through">
-                        ${product.originalPrice.toFixed(2)}
-                      </span> */}
                     </div>
                   </div>
                 }

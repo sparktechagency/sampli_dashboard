@@ -112,7 +112,7 @@ const OverviewSampler = () => {
       <div className="flex justify-between items-center mt-14">
         <h2 className="text-xl font-semibold mb-5">Overview</h2>
         <Dropdown overlay={menu} trigger={["click"]}>
-          <button className="border px-3 py-1 rounded-lg flex items-center gap-2 text-gray-600 hover:bg-gray-100">
+          <button className="border border-gray-300 px-3 py-1 rounded-lg flex items-center gap-2 text-gray-600 hover:bg-gray-100">
             <FilterOutlined />
             {isFetching ? "Loading..." : labelName} <DownOutlined />
           </button>
