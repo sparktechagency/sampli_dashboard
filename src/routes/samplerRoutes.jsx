@@ -1,33 +1,35 @@
-import React from "react";
-import ContactUs from "../pages/contactUs/ContactUs.jsx";
+import React, { lazy } from "react";
 import PageNotFound from "../pages/pageNotFound/PageNotFound.jsx";
-import PrivacyPolicy from "../pages/privacyPolicy/PrivacyPolicy.jsx";
-import SamplerHome from "../pages/sampler/SamplerHome/SamplerHome.jsx";
-import AllOfferSampler from "../pages/sampler/SamplerHome/components/offer/AllOfferSampler.jsx";
-import EarningsSampler from "../pages/sampler/SamplerHome/components/reviewsAndEarnings/EarningsSampler.jsx";
-import SamplerReviewer from "../pages/sampler/SamplerHome/components/reviewsAndEarnings/SamplerReviewer.jsx";
-import TransactionHistorySampler from "../pages/sampler/SamplerHome/components/reviewsAndEarnings/TransactionHistorySampler.jsx";
-import ShipmentAndAlertSampler from "../pages/sampler/SamplerHome/components/shipments/ShipmentAndAlertSampler.jsx";
-import MyPurchasesSampler from "../pages/sampler/SamplerHome/components/shipments/components/MyPurchasesSampler.jsx";
-import NotificationsSampler from "../pages/sampler/SamplerHome/components/shipments/components/NotificationsSampler.jsx";
-import OfferShipmentsSampler from "../pages/sampler/SamplerHome/components/shipments/components/OfferShipmentsSampler.jsx";
-import ReturnItemsSampler from "../pages/sampler/SamplerHome/components/shipments/components/ReturnItemsSampler.jsx";
-import WishlistSampler from "../pages/sampler/SamplerHome/components/shipments/components/WishlistSampler.jsx";
-import OrderSuccessSampler from "../pages/sampler/orderSucess/OrderSuccessSampler.jsx";
-import ProductListCheckoutSampler from "../pages/sampler/productListCheckoutSampler/ProductListCheckoutSampler.jsx";
-import MyProfileSampler from "../pages/sampler/profile/MyProfileSampler.jsx";
-import SamplerFeed from "../pages/sampler/samplerFeed/SamplerFeed.jsx";
-import SamplerLayout from "../pages/sampler/samplerLayout/SamplerLayout.jsx";
-import SettingsSampler from "../pages/sampler/settings/SettingsSampler.jsx";
-import BasicDetailsSettingsSampler from "../pages/sampler/settings/components/basicdetails/BasicDetailsSettingsSampler.jsx";
-import NotificationsSettingsSampler from "../pages/sampler/settings/components/notifications/NotificationsSettingsSampler.jsx";
-import PreferencesSettingsSampler from "../pages/sampler/settings/components/preferences/PreferencesSettingsSampler.jsx";
-import SecuritySettingsSampler from "../pages/sampler/settings/components/security/SecuritySettingsSampler.jsx";
-import ServiceWithCategory from "../pages/sampler/shop/serviceWithCategory/ServiceWithCategory.jsx";
-import ServiceWithCategoryProductDetails from "../pages/sampler/shop/serviceWithCategoryProductDetails/ServiceWithCategoryProductDetails.jsx";
-import ShopHeroPage from "../pages/sampler/shop/shopHeroPage/ShopHeroPage.jsx";
-import TermsAndConditions from "../pages/termsAndConditions/TermsAndConditions.jsx";
 import ProtectedRoute from "./ProtectedRoute.jsx";
+
+// Lazy load all components
+const ContactUs = lazy(() => import("../pages/contactUs/ContactUs.jsx"));
+const PrivacyPolicy = lazy(() => import("../pages/privacyPolicy/PrivacyPolicy.jsx"));
+const SamplerHome = lazy(() => import("../pages/sampler/SamplerHome/SamplerHome.jsx"));
+const AllOfferSampler = lazy(() => import("../pages/sampler/SamplerHome/components/offer/AllOfferSampler.jsx"));
+const EarningsSampler = lazy(() => import("../pages/sampler/SamplerHome/components/reviewsAndEarnings/EarningsSampler.jsx"));
+const SamplerReviewer = lazy(() => import("../pages/sampler/SamplerHome/components/reviewsAndEarnings/SamplerReviewer.jsx"));
+const TransactionHistorySampler = lazy(() => import("../pages/sampler/SamplerHome/components/reviewsAndEarnings/TransactionHistorySampler.jsx"));
+const ShipmentAndAlertSampler = lazy(() => import("../pages/sampler/SamplerHome/components/shipments/ShipmentAndAlertSampler.jsx"));
+const MyPurchasesSampler = lazy(() => import("../pages/sampler/SamplerHome/components/shipments/components/MyPurchasesSampler.jsx"));
+const NotificationsSampler = lazy(() => import("../pages/sampler/SamplerHome/components/shipments/components/NotificationsSampler.jsx"));
+const OfferShipmentsSampler = lazy(() => import("../pages/sampler/SamplerHome/components/shipments/components/OfferShipmentsSampler.jsx"));
+const ReturnItemsSampler = lazy(() => import("../pages/sampler/SamplerHome/components/shipments/components/ReturnItemsSampler.jsx"));
+const WishlistSampler = lazy(() => import("../pages/sampler/SamplerHome/components/shipments/components/WishlistSampler.jsx"));
+const OrderSuccessSampler = lazy(() => import("../pages/sampler/orderSucess/OrderSuccessSampler.jsx"));
+const ProductListCheckoutSampler = lazy(() => import("../pages/sampler/productListCheckoutSampler/ProductListCheckoutSampler.jsx"));
+const MyProfileSampler = lazy(() => import("../pages/sampler/profile/MyProfileSampler.jsx"));
+const SamplerFeed = lazy(() => import("../pages/sampler/samplerFeed/SamplerFeed.jsx"));
+const SamplerLayout = lazy(() => import("../pages/sampler/samplerLayout/SamplerLayout.jsx"));
+const SettingsSampler = lazy(() => import("../pages/sampler/settings/SettingsSampler.jsx"));
+const BasicDetailsSettingsSampler = lazy(() => import("../pages/sampler/settings/components/basicdetails/BasicDetailsSettingsSampler.jsx"));
+const NotificationsSettingsSampler = lazy(() => import("../pages/sampler/settings/components/notifications/NotificationsSettingsSampler.jsx"));
+const PreferencesSettingsSampler = lazy(() => import("../pages/sampler/settings/components/preferences/PreferencesSettingsSampler.jsx"));
+const SecuritySettingsSampler = lazy(() => import("../pages/sampler/settings/components/security/SecuritySettingsSampler.jsx"));
+const ServiceWithCategory = lazy(() => import("../pages/sampler/shop/serviceWithCategory/ServiceWithCategory.jsx"));
+const ServiceWithCategoryProductDetails = lazy(() => import("../pages/sampler/shop/serviceWithCategoryProductDetails/ServiceWithCategoryProductDetails.jsx"));
+const ShopHeroPage = lazy(() => import("../pages/sampler/shop/shopHeroPage/ShopHeroPage.jsx"));
+const TermsAndConditions = lazy(() => import("../pages/termsAndConditions/TermsAndConditions.jsx"));
 
 export const samplerRoutes = {
   path: "/",

@@ -3,7 +3,7 @@ import {
   Avatar,
   Button,
   Input,
-  Tabs,
+  Segmented,
   Rate,
   Modal,
   Dropdown,
@@ -47,13 +47,12 @@ import toast from "react-hot-toast";
 import { CustomSkeleton } from "./CustomSkeleton";
 import ReviewPost from "./ReviewPost";
 import { frontendUrl, url } from "../../../Redux/main/server";
-import SidebarHome from "./SidebarHome";
 import logo from "../../../assets/logo/logo.svg"
 import FeedCategorySection from "./FeedCategorySection";
-const { TabPane } = Tabs;
-
+import SidebarHome from './SidebarHome';
+import "./Empty.css"
 const SamplerFeed = () => {
- 
+
   const [activeCategory, setActiveCategory] = useState("");
 
   const [changeFollowUnfollow, { isLoading: isFollowing }] = usePostFollowUnfollowMutation();
@@ -190,7 +189,8 @@ const SamplerFeed = () => {
   }
 
   return (
-    <div className="container mx-auto !mt-2 !mb-20 ">
+    <div
+      className="container mx-auto !mt-2 !mb-20 ">
       <div className="bg-white flex justify-between items-start gap-10 max-lg:flex-col">
         {/* left side */}
         <div className="grid grid-cols-8 gap-4">
@@ -243,52 +243,58 @@ const SamplerFeed = () => {
           </Card>
           {/* right side */}
           <div className="w-full !col-span-12 lg:!col-span-4">
-            {/* Feed Tabs */}
-            <Tabs type="card" activeKey={activeTab} onChange={setActiveTab} className="!mt-5">
-              <TabPane
-                tab={
-                  <div className="flex gap-2">
-                    {activeTab === "" ? (
-                      <img src={newActiveLogo} alt="new active" />
-                    ) : (
-                      <img src={newLogo} alt="new inactive" />
-                    )}
-                    <span>New</span>
-                  </div>
-                }
-                key=""
+            {/* Feed Segmented */}
+            <div className="!mt-5">
+              <Segmented
+                value={activeTab || "new"}
+                onChange={(value) => setActiveTab(value === "new" ? "" : value)}
+                className="w-full border border-gray-200 rounded-lg p-2"
+                size='large'
+                options={[
+                  {
+                    label: (
+                      <div className="flex gap-2 items-center">
+                        {activeTab === "" ? (
+                          <img src={newActiveLogo} alt="new active" />
+                        ) : (
+                          <img src={newLogo} alt="new inactive" />
+                        )}
+                        <span>New</span>
+                      </div>
+                    ),
+                    value: "new",
+                  },
+                  {
+                    label: (
+                      <div className="flex gap-2 items-center">
+                        {activeTab === "following" ? (
+                          <img src={followingActiveLogo} alt="following active" />
+                        ) : (
+                          <img src={followingInactiveLogo} alt="following inactive" />
+                        )}
+                        <span>Following</span>
+                      </div>
+                    ),
+                    value: "following",
+                  },
+                  {
+                    label: (
+                      <div className="flex gap-2 items-center">
+                        {activeTab === "popular" ? (
+                          <img src={popularActiveLogo} alt="popular active" />
+                        ) : (
+                          <img src={popularInActiveLogo} alt="popular inactive" />
+                        )}
+                        <span>Popular</span>
+                      </div>
+                    ),
+                    value: "popular",
+                  },
+                ]}
               />
-              <TabPane
-                tab={
-                  <div className="flex gap-2">
-                    {activeTab === "following" ? (
-                      <img src={followingActiveLogo} alt="following active" />
-                    ) : (
-                      <img src={followingInactiveLogo} alt="following inactive" />
-                    )}
-                    <span>Following</span>
-                  </div>
-                }
-                key="following"
-              />
-
-              <TabPane
-                tab={
-                  <div className="flex gap-2">
-                    {activeTab === "popular" ? (
-                      <img src={popularActiveLogo} alt="popular active" />
-                    ) : (
-                      <img src={popularInActiveLogo} alt="popular inactive" />
-                    )}
-                    <span>Popular</span>
-                  </div>
-                }
-                key="popular"
-              />
-            </Tabs>
-
+            </div>
             {/* Category Pills */}
-           <FeedCategorySection  setActiveCategory={setActiveCategory} activeCategory={activeCategory} />
+            <FeedCategorySection setActiveCategory={setActiveCategory} activeCategory={activeCategory} />
             {/* Skeleton */}
             {reviewLoading && (
               <CustomSkeleton />
@@ -297,6 +303,19 @@ const SamplerFeed = () => {
             <div>
               {posts?.length == 0 && (
                 <div className="h-screen">
+                  {/* <div className="outer">
+                    <div className="dot"></div>
+                    <div className="card">
+                      <div className="ray"></div>
+                      <div className="text">750k</div>
+                      <div>Views</div>
+                      <div className="line topl"></div>
+                      <div className="line leftl"></div>
+                      <div className="line bottoml"></div>
+                      <div className="line rightl"></div>
+                    </div>
+                  </div> */}
+
                   <Empty image={Empty.PRESENTED_IMAGE_SIMPLE} />
                 </div>
               )}

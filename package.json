@@ -9,6 +9,10 @@
     "lint": "eslint .",
     "preview": "vite preview"
   },
+  "resolutions": {
+    "react": "18.3.1",
+    "react-dom": "18.3.1"
+  },
   "dependencies": {
     "@react-oauth/google": "^0.12.2",
     "@reduxjs/toolkit": "^2.8.2",
@@ -33,7 +37,7 @@
     "react-redux": "^9.2.0",
     "react-router-dom": "^7.1.5",
     "react-select": "^5.10.0",
-    "react-share-social": "^0.1.60",
+    "react-share-social": "^0.1.59",
     "react-spring": "^9.7.5",
     "recharts": "^2.15.1",
     "swiper": "^12.0.2"
@@ -45,8 +49,8 @@
     "@vitejs/plugin-react": "^4.3.4",
     "autoprefixer": "^10.4.20",
     "daisyui": "^4.12.23",
-    "eslint": "^9.20.1",
-    "eslint-plugin-react": "^7.37.4",
+    "eslint": "^10.0.1",
+    "eslint-plugin-react": "^7.22.0",
     "eslint-plugin-react-hooks": "^5.0.0",
     "eslint-plugin-react-refresh": "^0.4.18",
     "globals": "^15.14.0",

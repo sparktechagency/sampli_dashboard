@@ -1,16 +1,12 @@
 import React from "react";
-import { Button, Typography, Divider } from "antd";
-import { AppleOutlined, GoogleOutlined } from "@ant-design/icons";
-import Logo from "../../../components/ui/Logo";
-import { TiSocialFacebook } from "react-icons/ti";
-import InputField from "../../../components/ui/InputField";
-import FormWrapper from "../../../components/ui/FormWrapper";
-import { Link, useNavigate } from "react-router-dom";
+import { Button, Divider, Typography } from "antd";
 import toast from "react-hot-toast";
+import { Link, useNavigate } from "react-router-dom";
 import { useAuthSectionSignupMutation } from "../../../Redux/sampler/authSectionApis";
+import FormWrapper from "../../../components/ui/FormWrapper";
+import InputField from "../../../components/ui/InputField";
+import Logo from "../../../components/ui/Logo";
 import GoogleAuthButton from "../../../googleAuthButton/GoogleAuthButton";
-import apple from "../../../assets/socialsLogo/apple.png";
-import fb from "../../../assets/socialsLogo/facebook.svg";
 
 const { Title } = Typography;
 
@@ -49,7 +45,7 @@ const Signup = () => {
   return (
     <div className="flex justify-center items-center min-h-screen bg-gray-100 p-4 gradient-container">
       <div className="gradient-ellipse"></div>
-      <div className="bg-white shadow-lg rounded-2xl p-6 w-full max-w-lg text-center">
+      <div className="bg-white shadow-lg rounded-2xl p-6 w-full max-w-lg text-start">
         <Title level={3} className="text-blue-500">
           <Logo />
         </Title>

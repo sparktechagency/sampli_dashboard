@@ -3,7 +3,7 @@ import { Card, Carousel, Skeleton } from "antd";
 import { LeftOutlined, RightOutlined } from "@ant-design/icons";
 import { Link } from "react-router-dom";
 import { useCategorySectionApisQuery } from "../../../../../Redux/sampler/categoryApis";
-
+import circleBg from "../../../../../assets/circle.png";
 const CategoryCarousel = () => {
   const carouselRef = useRef(null);
 
@@ -12,7 +12,7 @@ const CategoryCarousel = () => {
   const categories = getAllCategory?.data;
 
   return (
-    <div className=" my-8 relative">
+    <div className="my-8 relative">
       <h2 className="text-[24px] font-bold mb-4 p-2 ">Shop by Category</h2>
       {categories?.length !== 0 ? (
         <>
@@ -48,7 +48,9 @@ const CategoryCarousel = () => {
             {isLoading ?
               Array.from({ length: 4 }).map((_, index) => (
                 <div className="flex ml-12 items-center justify-center">
-                  <div className="max-w-52 aspect-square h-52 rounded-full animate-pulse bg-gray-200 flex items-center justify-center">
+                  <div
+                    key={index}
+                    className="max-w-52 aspect-square h-52 rounded-full animate-pulse bg-gray-200 flex items-center justify-center">
                     <div className="w-16 h-16 rounded-full border-l2 border-b-2 animate-spin"></div>
                   </div>
                 </div>
@@ -61,11 +63,20 @@ const CategoryCarousel = () => {
                   state={{ categoryId: category.id }}
                 >
                   <div className="flex flex-col items-center">
-                    <div className="flex flex-col items-center overflow-hidden  justify-center w-52 h-52  border-gray-300 rounded-full border cursor-pointer hover:shadow-lg transition">
+                    <div
+                      style={{
+                        backgroundImage: `url(${circleBg})`,
+                        backgroundSize: 'contain',
+                        backgroundPosition: 'center',
+                        backgroundRepeat: 'no-repeat',
+                      }}
+                      className="flex flex-col items-center overflow-hidden justify-center w-52 h-52 
+                      p-4 border-gray-300 rounded-full border cursor-pointer hover:shadow-lg transition"
+                    >
                       <img
                         src={category.category_image}
                         alt={category.name}
-                        className="w-52 h-52 bg-gray-100 rounded-full mx-auto  object-cover object-center"
+                        className="w-52 h-52 bg-transparent rounded-full mx-auto  object-cover object-center"
                       />
                     </div>
                     <p className="text-sm text-black font-medium !mt-5 text-center">
