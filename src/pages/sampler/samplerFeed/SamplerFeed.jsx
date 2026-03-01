@@ -225,10 +225,10 @@ const SamplerFeed = () => {
                 </div>
               </div>
 
-              {/* Divider */}
-              <div className="border-t border-gray-200"></div>
 
-              {/* Edit Profile Button */}
+              {/* <div className="border-t border-gray-200"></div>
+
+
               <div className="flex justify-center absolute bottom-0 left-0 w-full! ">
                 <Link
                   className="w-full!"
@@ -242,7 +242,7 @@ const SamplerFeed = () => {
                     Edit Profile
                   </Button>
                 </Link>
-              </div>
+              </div> */}
             </div>
           </div>
           {/* middle  */}
