@@ -1,4 +1,4 @@
-import { Checkbox } from "antd";
+import { Button, Checkbox } from "antd";
 import React, { useState } from "react";
 import toast from "react-hot-toast";
 import { useAddCurrentlyShareReviewerMutation } from "../../../../Redux/sampler/authSectionApis";
@@ -53,10 +53,10 @@ const ReviewPlatforms = ({ prev, next }) => {
             <div
               key={platform}
               onClick={() => toggleSelect(platform)}
-              className={`p-5 border rounded cursor-pointer
+              className={`p-5 border rounded-xl cursor-pointer
                 ${selectedReviews.includes(platform)
                   ? "border-blue-500 bg-blue-50"
-                  : "border-gray-500"
+                  : "border-gray-300"
                 }
               `}
             >
@@ -73,23 +73,28 @@ const ReviewPlatforms = ({ prev, next }) => {
         </div>
 
         <div className="flex justify-between">
-          <button
+          <Button
             onClick={prev}
-            className="cursor-pointer hover:!text-blue-500"
+            className="cursor-pointer hover:text-blue-500!"
+            size='large'
+            type='default'
           >
             Back
-          </button>
-          <button
-            type="submit"
+          </Button>
+          <Button
+            htmlType="submit"
+            type='primary'
+            size='large'
             onClick={handleSubmit}
-            className="cursor-pointer hover:!text-blue-500"
+            className="cursor-pointer hover:text-blue-500!"
+            loading={isLoading}
           >
             {isLoading ? "Loading..." : " Next"}
-          </button>
+          </Button>
         </div>
       </div>
     </div>
   );
 };
 
-export default ReviewPlatforms;
+export default React.memo(ReviewPlatforms);

@@ -1,4 +1,4 @@
-import { Form, Select } from 'antd'
+import { Button, Form, Select } from 'antd'
 import React from 'react'
 import { useAddPersonalInfoReviewerMutation } from '../../../../Redux/sampler/authSectionApis'
 import toast from 'react-hot-toast'
@@ -182,12 +182,15 @@ const AllCategories = ({ next }) => {
 
           {/* Submit Button */}
           <div className="flex justify-end">
-            <button
-              type="submit"
+            <Button
+              type="primary"
+              htmlType="submit"
+              size="large"
+              loading={isLoading}
               className="!text-[16px] flex justify-end cursor-pointer hover:!text-blue-500"
             >
               {isLoading ? 'Loading...' : ' Next'}
-            </button>
+            </Button>
           </div>
         </div>
       </Form>
@@ -195,4 +198,4 @@ const AllCategories = ({ next }) => {
   )
 }
 
-export default AllCategories
+export default React.memo(AllCategories);

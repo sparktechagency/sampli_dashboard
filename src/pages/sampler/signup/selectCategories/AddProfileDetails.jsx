@@ -1,5 +1,5 @@
-import { Form, Image, Input, Upload } from "antd";
-import React, { useState } from "react";
+import { Button, Form, Image, Input, Upload } from "antd";
+import React, { memo, useState } from "react";
 import toast from "react-hot-toast";
 import image1 from "/public/randomImage/118.png";
 import image2 from "/public/randomImage/120.png";
@@ -182,11 +182,10 @@ const AddProfileDetails = ({ prev, next }) => {
                 <div
                   key={index}
                   onClick={() => !isProcessing && selectDefaultImage(index)}
-                  className={`w-24 h-24 rounded-full overflow-hidden border cursor-pointer transition-all ${
-                    selectedImageIndex === index
-                      ? "border-blue-500 border-4 scale-105"
-                      : "border-gray-300"
-                  } ${isProcessing ? "opacity-50 cursor-not-allowed" : ""}`}
+                  className={`w-24 h-24 rounded-full overflow-hidden border cursor-pointer transition-all ${selectedImageIndex === index
+                    ? "border-blue-500 border-4 scale-105"
+                    : "border-gray-300"
+                    } ${isProcessing ? "opacity-50 cursor-not-allowed" : ""}`}
                 >
                   <img
                     src={imgSrc}
@@ -301,31 +300,37 @@ const AddProfileDetails = ({ prev, next }) => {
           >
             <Input.TextArea
               maxLength={120}
+              style={{ minHeight: '150px' }}
+              showCount
               placeholder="Write about yourself..."
               disabled={isProcessing}
             />
           </Form.Item>
         </div>
         <div className="flex justify-between text-[16px]">
-          <button
+          <Button
             onClick={prev}
             className="cursor-pointer hover:!text-blue-500 disabled:opacity-50 disabled:cursor-not-allowed"
-            type="button"
+            type="default"
+            size="large"
             disabled={isProcessing}
           >
             Back
-          </button>
-          <button
-            type="submit"
+          </Button>
+          <Button
+            htmlType="submit"
+            type="primary"
+            size="large"
             className="cursor-pointer hover:!text-blue-500 disabled:opacity-50 disabled:cursor-not-allowed"
             disabled={isProcessing}
+            loading={isProcessing}
           >
             {isProcessing ? "Processing..." : "Next"}
-          </button>
+          </Button>
         </div>
       </div>
     </Form>
   );
 };
 
-export default AddProfileDetails;
+export default memo(AddProfileDetails);

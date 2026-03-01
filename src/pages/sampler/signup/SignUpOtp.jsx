@@ -1,4 +1,4 @@
-import React, { useState, useRef, useEffect } from "react";
+import React, { useState, useRef, useEffect, memo } from "react";
 import { Typography, Input, Button } from "antd";
 import { Link, useLocation, useNavigate } from "react-router-dom";
 import Logo from "../../../components/ui/Logo";
@@ -56,7 +56,7 @@ const SignUpOtp = () => {
         toast.success(res.message);
         setTimeLeft(30);
       }
-      
+
     } catch (error) {
       toast.error(
         error?.data?.message || "Something went wrong. Please try again."
@@ -162,4 +162,4 @@ const SignUpOtp = () => {
   );
 };
 
-export default SignUpOtp;
+export default memo(SignUpOtp);

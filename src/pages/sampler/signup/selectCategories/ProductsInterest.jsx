@@ -1,4 +1,4 @@
-import { Checkbox } from "antd";
+import { Button, Checkbox } from "antd";
 import React, { useState } from "react";
 import toast from "react-hot-toast";
 import { useCategorySectionApisQuery } from "../../../../Redux/sampler/categoryApis";
@@ -10,7 +10,7 @@ const ProductsInterest = ({ prev, next }) => {
   const { data: getAllCategory, isLoading } = useCategorySectionApisQuery();
   const [addInterestedCategory, { isLoading: interestedLoading }] =
     useAddInterestedCategoryReviewerMutation();
-  
+
   const toggleSelect = (id) => {
     setSelectedInterests((prev) =>
       prev.includes(id)
@@ -53,9 +53,9 @@ const ProductsInterest = ({ prev, next }) => {
             <div
               key={item?._id}
               onClick={() => toggleSelect(item?._id)}
-              className={`p-5 border ${selectedInterests.includes(item?._id)
+              className={`p-5 border rounded-xl ${selectedInterests.includes(item?._id)
                 ? "border-blue-500 bg-blue-50"
-                : "border-gray-500"
+                : "border-gray-300"
                 } cursor-pointer`}
             >
               <Checkbox
@@ -71,22 +71,26 @@ const ProductsInterest = ({ prev, next }) => {
           ))}
         </div>
         <div className="flex justify-between">
-          <button
+          <Button
             onClick={prev}
-            className=" flex justify-end  cursor-pointer hover:!text-blue-500"
+            size="large"
+            className=" flex justify-end  cursor-pointer hover:text-blue-500!"
           >
             Back
-          </button>
-          <button
+          </Button>
+          <Button
+            type="primary"
             onClick={handleSubmit}
-            className=" flex justify-end cursor-pointer hover:!text-blue-500"
+            loading={interestedLoading}
+            size="large"
+            className=" flex justify-end cursor-pointer hover:text-blue-500!"
           >
             {interestedLoading ? "Loading..." : " Next"}
-          </button>
+          </Button>
         </div>
       </div>
     </div>
   );
 };
 
-export default ProductsInterest;
+export default React.memo(ProductsInterest);

@@ -1,4 +1,4 @@
-import { Form, Input, Select } from "antd";
+import { Button, Form, Input, Select } from "antd";
 import { City, State } from "country-state-city";
 import React from "react";
 import { useAddShippingAddressReviewerMutation } from "../../../../Redux/sampler/authSectionApis";
@@ -51,7 +51,7 @@ const ContactAndShippingInformation = ({ prev, next }) => {
         onFinish={handleFormSubmit}
         requiredMark={true}
       >
-        <div className="!flex !flex-col !justify-between h-auto">
+        <div className="flex! flex-col! justify-between! h-auto">
           <div>
             <div className="flex w-full gap-5 items-center justify-between">
               <Form.Item
@@ -60,7 +60,7 @@ const ContactAndShippingInformation = ({ prev, next }) => {
                 rules={[{ required: true, message: "Please enter your name" }]}
                 className="w-full"
               >
-                <Input placeholder="Enter your name" />
+                <Input size='large' placeholder="Enter your name" />
               </Form.Item>
               {/* <Form.Item
                 label="Company name"
@@ -73,7 +73,7 @@ const ContactAndShippingInformation = ({ prev, next }) => {
                 ]}
                 className="w-full"
               >
-                <Input placeholder="Enter your company name" />
+                <Input size='large' placeholder="Enter your company name" />
               </Form.Item> */}
             </div>
             <div className="flex w-full gap-5 items-center justify-between">
@@ -83,7 +83,7 @@ const ContactAndShippingInformation = ({ prev, next }) => {
                 rules={[{ required: true, message: "Please enter your email" }]}
                 className="w-full"
               >
-                <Input placeholder="Enter your email" />
+                <Input size='large' placeholder="Enter your email" />
               </Form.Item>
             </div>
 
@@ -96,7 +96,7 @@ const ContactAndShippingInformation = ({ prev, next }) => {
                 ]}
                 className="w-full"
               >
-                <Input placeholder="Enter your address" />
+                <Input size='large' placeholder="Enter your address" />
               </Form.Item>
               {/* <Form.Item
                 label="Street 2"
@@ -106,7 +106,7 @@ const ContactAndShippingInformation = ({ prev, next }) => {
                 ]}
                 className="w-full"
               >
-                <Input placeholder="Enter your address" />
+                <Input size='large' placeholder="Enter your address" />
               </Form.Item> */}
             </div>
 
@@ -118,7 +118,7 @@ const ContactAndShippingInformation = ({ prev, next }) => {
                 rules={[{ required: true }]}
                 className="flex-1"
               >
-                <Select disabled>
+                <Select size='large' disabled>
                   <Select.Option value="US">United States</Select.Option>
                 </Select>
               </Form.Item>
@@ -131,7 +131,7 @@ const ContactAndShippingInformation = ({ prev, next }) => {
                 ]}
                 className="flex-1"
               >
-                <Select
+                <Select size='large'
                   showSearch
                   placeholder={
                     <div className="flex items-start justify-start">
@@ -163,7 +163,7 @@ const ContactAndShippingInformation = ({ prev, next }) => {
                 ]}
                 className="flex-1"
               >
-                <Select
+                <Select size='large'
                   showSearch
                   placeholder={
                     <div className="flex items-start justify-start">
@@ -188,7 +188,7 @@ const ContactAndShippingInformation = ({ prev, next }) => {
                 ]}
                 className="flex-1"
               >
-                <Input placeholder="ZIP code" />
+                <Input size='large' placeholder="ZIP code" />
               </Form.Item>
             </div>
 
@@ -201,30 +201,35 @@ const ContactAndShippingInformation = ({ prev, next }) => {
                 ]}
                 className="w-full"
               >
-                <Input placeholder="Enter your phone number" />
+                <Input size='large' placeholder="Enter your phone number" />
               </Form.Item>
               {/* <Form.Item
                 label="Alternate Phone number"
                 name="altPhone"
                 className="w-full"
               >
-                <Input placeholder="Enter your alternate phone number" />
+                <Input size='large' placeholder="Enter your alternate phone number" />
               </Form.Item> */}
             </div>
           </div>
           <div className="flex justify-between text-[16px]">
-            <button
+            <Button
               onClick={prev}
-              className="cursor-pointer hover:!text-blue-500"
+              type='default'
+              size='large'
+              className="cursor-pointer hover:text-blue-500!"
             >
               Back
-            </button>
-            <button
-              type="submit"
-              className="cursor-pointer hover:!text-blue-500"
+            </Button>
+            <Button
+              type='primary'
+              size='large'
+              htmlType="submit"
+              className="cursor-pointer hover:text-blue-500!"
+              loading={isLoading}
             >
               {isLoading ? "Loading..." : "Next"}
-            </button>
+            </Button>
           </div>
         </div>
       </Form>
@@ -232,4 +237,4 @@ const ContactAndShippingInformation = ({ prev, next }) => {
   );
 };
 
-export default ContactAndShippingInformation;
+export default React.memo(ContactAndShippingInformation);

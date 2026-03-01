@@ -1,4 +1,4 @@
-import { Form, Input } from "antd";
+import { Button, Form, Input } from "antd";
 import React from "react";
 import toast from "react-hot-toast";
 import {
@@ -17,8 +17,8 @@ const AddYourSocials = ({ prev, next }) => {
   const [updateProfile, { isLoading }] = useUpdateProfileApisMutation();
 
   const handleFormSubmit = async (values) => {
-    console.log(values?.instagram )
-    if (!values?.instagram  && !values?.twitter  && !values?.tiktok  && !values?.youtube ) {
+    console.log(values?.instagram)
+    if (!values?.instagram && !values?.twitter && !values?.tiktok && !values?.youtube) {
       next();
       return;
     }
@@ -74,29 +74,29 @@ const AddYourSocials = ({ prev, next }) => {
           <div className="flex flex-col space-y-4">
             <Form.Item name="instagram" className="w-full">
               <div className="flex items-center space-x-3">
-                <AiFillInstagram size={24} className="text-pink-600" />
-                <Input placeholder="Instagram username" />
+                <AiFillInstagram size={48} className="text-pink-600" />
+                <Input size="large" placeholder="Instagram username" />
               </div>
             </Form.Item>
 
             <Form.Item name="twitter" className="w-full">
               <div className="flex items-center space-x-3">
-                <AiFillTwitterCircle size={24} className="text-blue-400" />
-                <Input placeholder="Twitter username" />
+                <AiFillTwitterCircle size={48} className="text-blue-400" />
+                <Input size="large" placeholder="Twitter username" />
               </div>
             </Form.Item>
 
             <Form.Item name="youtube" className="w-full">
               <div className="flex items-center space-x-3">
-                <AiFillYoutube size={24} className="text-red-600" />
-                <Input placeholder="YouTube Channel" />
+                <AiFillYoutube size={48} className="text-red-600" />
+                <Input size="large" placeholder="YouTube Channel" />
               </div>
             </Form.Item>
 
             <Form.Item name="tiktok" className="w-full">
               <div className="flex items-center space-x-3">
-                <FaTiktok size={24} className="text-black" />
-                <Input placeholder="TikTok Username" />
+                <FaTiktok size={48} className="text-black" />
+                <Input size="large" placeholder="TikTok Username" />
               </div>
             </Form.Item>
           </div>
@@ -104,21 +104,22 @@ const AddYourSocials = ({ prev, next }) => {
 
         {/* Buttons */}
         <div className="flex justify-between text-[16px]">
-          <button
-            type="button"
+          <Button
+            type="default"
+            size='large'
             onClick={prev}
-            className="cursor-pointer hover:!text-blue-500"
+            className="cursor-pointer hover:text-blue-500!"
           >
             Back
-          </button>
+          </Button>
 
-          <button type="submit" className="cursor-pointer hover:!text-blue-500">
+          <Button type="primary" size='large' htmlType='submit'  >
             {isLoading ? "Uploading..." : "Next"}
-          </button>
+          </Button>
         </div>
       </div>
     </Form>
   );
 };
 
-export default AddYourSocials;
+export default React.memo(AddYourSocials);

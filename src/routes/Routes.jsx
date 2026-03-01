@@ -51,7 +51,7 @@
 //   },
 // ]);
 
-import React, { lazy, Suspense } from "react";
+import React, { lazy } from "react";
 
 import { createBrowserRouter } from "react-router-dom";
 import Layout from "../components/Layout";
@@ -83,15 +83,10 @@ const SelectAllCategories = lazy(() =>
 
 const BusinessSendOtp = lazy(() => import("../pages/Business/business_auth/BusinessSendOtp.jsx"));
 
-// const businessRoutes = lazy(() => import("./businessRoutes.jsx"));
-// const samplerRoutes = lazy(() => import("./samplerRoutes.jsx"));
-
-console.log(React.version);
-
 export const router = createBrowserRouter([
   {
     element: (
-      <Suspense
+      <React.Suspense
         fallback={
           <div>
             <LogoSpinLoader />
@@ -99,7 +94,7 @@ export const router = createBrowserRouter([
         }
       >
         <Layout />
-      </Suspense>
+      </React.Suspense>
     ),
 
     children: [
@@ -129,8 +124,10 @@ export const router = createBrowserRouter([
         path: "/sign-up-select-all-categories",
         element: <SelectAllCategories />,
       },
-
-      { path: "/business/otp", element: <BusinessSendOtp /> },
+      {
+        path: "/business/otp",
+        element: <BusinessSendOtp />
+      },
     ],
   },
 ]);

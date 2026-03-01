@@ -1,4 +1,4 @@
-import React from "react";
+import React, { memo } from "react";
 import { Button, Typography, Form, Select } from "antd";
 import Logo from "../../../components/ui/Logo";
 import InputField from "../../../components/ui/InputField";
@@ -217,4 +217,4 @@ const SignUpMoreInformation = () => {
   );
 };
 
-export default SignUpMoreInformation;
+export default memo(SignUpMoreInformation);
