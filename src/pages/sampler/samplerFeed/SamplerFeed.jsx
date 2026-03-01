@@ -1,4 +1,4 @@
-import React, { useCallback, useEffect, useState } from "react";
+import React, { useCallback, useEffect, useMemo, useState } from "react";
 import { Avatar, Button, Segmented, Modal, Empty, Card } from "antd";
 import { ShareAltOutlined } from "@ant-design/icons";
 import { Link } from "react-router-dom";
@@ -24,6 +24,8 @@ import FeedCategorySection from "./FeedCategorySection";
 import SidebarHome from "./SidebarHome";
 import "./Empty.css";
 import EmptyData from "./EmptyData";
+import Lottie, { useLottie } from 'lottie-react';
+import noData from './no_data.json';
 const SamplerFeed = () => {
   const [activeCategory, setActiveCategory] = useState("");
 
@@ -64,6 +66,15 @@ const SamplerFeed = () => {
   const posts = reviewList?.data?.data?.result;
   const [loading, setLoading] = useState(false);
 
+  const options = {
+    animationData: noData,
+    loop: true
+  };
+  const noDataAnimation = useMemo(() => {
+    return (
+      <Lottie animationData={noData} loop={true} />
+    )
+  }, []);
   const handleFollow = async (id) => {
     try {
       const res = await changeFollowUnfollow(id).unwrap();
@@ -303,22 +314,10 @@ const SamplerFeed = () => {
             {/* Skeleton */}
             {reviewLoading && <CustomSkeleton />}
 
-            <div>
+            <div className='flex items-center justify-center'>
               {posts?.length == 0 && (
-                <div className="min-h-32 flex items-center justify-center">
-                  {/* <div className="outer">
-                    <div className="dot"></div>
-                    <div className="card">
-                      <div className="ray"></div>
-                      <div className="text">750k</div>
-                      <div>Views</div>
-                      <div className="line topl"></div>
-                      <div className="line leftl"></div>
-                      <div className="line bottoml"></div>
-                      <div className="line rightl"></div>
-                    </div>
-                  </div> */}
-                  <EmptyData message="No reviews found" />
+                <div className="min-h-32 max-w-md mt-12 flex items-center justify-center">
+                  {noDataAnimation}
                 </div>
               )}
             </div>
@@ -354,7 +353,7 @@ const SamplerFeed = () => {
               maxHeight: "calc(100vh - 40px)",
               overflowY: "auto",
             }}
-            className="col-span-2! divide-y! bg-[#F5F5F5]/20 border border-gray-200 overflow-hidden rounded-2xl h-full hidden! lg:block!"
+            className="col-span-2! divide-y! bg-[#F5F5F5]/20 border border-gray-200 overflow-hidden rounded-2xl h-full hidden! lg:block! pt-4"
           >
             <SidebarHome />
           </div>
