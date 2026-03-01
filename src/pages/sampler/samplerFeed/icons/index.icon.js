@@ -1,4 +1,5 @@
 import earnings from "./earnings.gif"
+import noAddress from "./no-address.jpg"
 import profile from "./profile.gif"
 import review from "./review.gif"
 import settings from "./settings.gif"
@@ -10,5 +11,6 @@ export const icons = {
   wishlist,
   review,
   earnings,
-  settings
+  settings,
+  noAddress
 }

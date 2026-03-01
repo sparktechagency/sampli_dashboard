@@ -7,7 +7,7 @@ import ReviewsAndEarningsSampler from './components/reviewsAndEarnings/ReviewsAn
 
 const SamplerHome = () => {
   return (
-    <div className="responsive-width !mt-5 !mb-20 ">
+    <div className="responsive-width mt-5! mb-20! ">
       <HeaderSampler />
       <OverviewSampler />
       <OfferDataSampler />

@@ -62,8 +62,8 @@ const OverviewSampler = () => {
           data.data.totalEarning.change > 0
             ? "increase"
             : data.data.totalEarning.change < 0
-            ? "decrease"
-            : "neutral",
+              ? "decrease"
+              : "neutral",
       },
       {
         id: 2,
@@ -76,8 +76,8 @@ const OverviewSampler = () => {
           data.data.totalReview.change > 0
             ? "increase"
             : data.data.totalReview.change < 0
-            ? "decrease"
-            : "neutral",
+              ? "decrease"
+              : "neutral",
       },
       {
         id: 3,
@@ -90,8 +90,8 @@ const OverviewSampler = () => {
           data.data.itemInShipment.change > 0
             ? "increase"
             : data.data.itemInShipment.change < 0
-            ? "decrease"
-            : "neutral",
+              ? "decrease"
+              : "neutral",
       },
     ];
   }, [data, labelName]);
@@ -120,9 +120,9 @@ const OverviewSampler = () => {
       </div>
 
       {/* Stats */}
-      <div className="grid grid-cols-3 max-md:grid-cols-2 max-sm:grid-cols-1 gap-4">
+      <div className="grid grid-cols-3 border border-gray-300 overflow-hidden shadow mt-3 rounded-3xl max-md:grid-cols-2 max-sm:grid-cols-1 gap-4">
         {overviewItems.map((item) => (
-          <div key={item.id} className="bg-white p-4 rounded-lg shadow-sm">
+          <div key={item.id} className="bg-white p-4">
             <div className="flex gap-2 items-center mb-3">
               {<img src={item.icon} alt={item.name} className="mb-3" />}
               <p className="text-gray-500">{item.name}</p>
@@ -140,19 +140,18 @@ const OverviewSampler = () => {
                   </p>
 
                   <p
-                    className={`text-sm ${
-                      item.percentageType === "increase"
-                        ? "text-green-500"
-                        : item.percentageType === "decrease"
+                    className={`text-sm ${item.percentageType === "increase"
+                      ? "text-green-500"
+                      : item.percentageType === "decrease"
                         ? "text-red-500"
                         : "text-gray-500"
-                    }`}
+                      }`}
                   >
                     {item.percentageType === "increase"
                       ? "▲"
                       : item.percentageType === "decrease"
-                      ? "▼"
-                      : ""}{" "}
+                        ? "▼"
+                        : ""}{" "}
                     {item.percentage}
                   </p>
                 </>

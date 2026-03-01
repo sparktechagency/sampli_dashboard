@@ -35,6 +35,7 @@ import {
   useCreateOrderMutation,
   usePostShippingRatesMutation,
 } from "../../../Redux/sampler/shippoApis";
+import { icons } from '../samplerFeed/icons/index.icon';
 
 const { Title, Text } = Typography;
 
@@ -261,9 +262,8 @@ const SoloStoveCart = () => {
       width: 150,
       align: "center",
       render: (quantity, record) => {
-        const key = `${record.product._id}-${
-          record?.variant?._id || "no-variant"
-        }`;
+        const key = `${record.product._id}-${record?.variant?._id || "no-variant"
+          }`;
         const currentQuantity = modifiedQuantities[key] || quantity;
 
         return (
@@ -305,9 +305,8 @@ const SoloStoveCart = () => {
       width: 120,
       align: "right",
       render: (record) => {
-        const key = `${record.product._id}-${
-          record?.variant?._id || "no-variant"
-        }`;
+        const key = `${record.product._id}-${record?.variant?._id || "no-variant"
+          }`;
         const currentQuantity = modifiedQuantities[key] || record.quantity;
 
         return (
@@ -340,7 +339,7 @@ const SoloStoveCart = () => {
   };
 
   return (
-    <div className="responsive-width">
+    <div className="responsive-width min-h-[calc(100vh-240px)]">
       <div
         className=" mx-auto "
         style={{ margin: "20px 0 128px", overflow: "auto" }}
@@ -355,6 +354,7 @@ const SoloStoveCart = () => {
               columns={columns}
               dataSource={cartData}
               rowKey="_id"
+              bordered
               pagination={false}
               scroll={{ x: 700 }}
               summary={() => (
@@ -390,44 +390,43 @@ const SoloStoveCart = () => {
               )}
             />
 
-            {hasChanges && (
-              <div style={{ marginTop: 16 }}>
+
+            <div className='w-full mt-4'>
+              <div className="w-full flex gap-2 mb-3 items-center justify-end">
+                {hasChanges && (
+                  <div>
+                    <Button
+                      type="default"
+                      size="large"
+                      onClick={saveAllChanges}
+                      loading={updateCartLoading}
+                      icon={<SaveOutlined />}
+                      className="bg-green-700! text-white! hover:bg-green-600!"
+                      style={{ height: 50 }}
+                    >
+                      Save Changes
+                    </Button>
+                  </div>
+                )}
+
                 <Button
-                  type="default"
+                  type="primary"
                   size="large"
                   block
-                  onClick={saveAllChanges}
-                  loading={updateCartLoading}
-                  icon={<SaveOutlined />}
-                  className="!bg-green-700 !text-white hover:!bg-green-600"
+                  onClick={() => showModal()}
+                  style={{ height: 50, width: "fit-content" }}
                 >
-                  Save Changes
+                  Check out
                 </Button>
               </div>
-            )}
-
-            <div style={{ marginTop: 16 }}>
-              <Button
-                type="primary"
-                size="large"
-                block
-                onClick={() => showModal()}
-                style={{ height: 50 }}
-              >
-                Check out
-              </Button>
+              <Link to="/sampler/shop">
+                <h1 className='text-sm underline float-end uppercase'>Continue Shopping</h1>
+              </Link>
             </div>
           </>
         ) : (
           <div
-            style={{
-              display: "flex",
-              flexDirection: "column",
-              alignItems: "center",
-              minHeight: "400px",
-              justifyContent: "center",
-              height: "80vh",
-            }}
+            className='flex items-center justify-center'
           >
             <Empty
               image={<ShoppingOutlined style={{ fontSize: 64 }} />}
@@ -439,7 +438,7 @@ const SoloStoveCart = () => {
                       width: 64,
                       minWidth: 64,
                       backgroundColor: "#f5a623",
-                      margin: "16px auto",
+                      margin: "0px auto 10px auto",
                     }}
                   />
                   <Text type="secondary">
@@ -460,10 +459,15 @@ const SoloStoveCart = () => {
       </div>
 
       <Modal
-        title="Which address do you want to use?"
+        title={
+          shippingAddresses?.data?.length !== 0
+            ? "Which address do you want to use?"
+            : "Need address"
+        }
         closable={{ "aria-label": "Custom Close Button" }}
         open={isModalOpen}
         onOk={handleOk}
+        footer={shippingAddresses?.data?.length === 0 ? null : undefined}
         okButtonProps={
           shippingAddresses?.data?.length === 0 ? { disabled: true } : {}
         }
@@ -542,11 +546,12 @@ const SoloStoveCart = () => {
               </div>
             ) : (
               <div className="text-center">
+                <img src={icons.noAddress} alt="No address" className="w-32 h-32 object-cover aspect-square mx-auto" />
                 <Title level={5}>No shipping addresses found.</Title>
                 <div className="flex items-center justify-center">
                   <Link
                     to="/sampler/settings/basic-details-settings-sampler"
-                    className="text-blue-600 px-10 py-2 border border-gray-200 rounded-3xl mx-auto "
+                    className="text-blue-600 px-10 py-2 border border-gray-200 rounded-3xl mx-auto flex items-center gap-2"
                   >
                     Go to shipping address
                   </Link>
@@ -577,11 +582,10 @@ const SoloStoveCart = () => {
                   {providerList.map((provider) => (
                     <div
                       key={provider.objectId}
-                      className={`flex items-center p-3 cursor-pointer  rounded-md hover:shadow ${
-                        selectedRateId === provider?.objectId
-                          ? "border-2 border-blue-700 text-black"
-                          : "border-2 border-gray-300"
-                      }`}
+                      className={`flex items-center p-3 cursor-pointer  rounded-md hover:shadow ${selectedRateId === provider?.objectId
+                        ? "border-2 border-blue-700 text-black"
+                        : "border-2 border-gray-300"
+                        }`}
                       onClick={() => {
                         setSelectedRateId(provider?.objectId);
                         setShipment(provider?.shipment);

@@ -1,21 +1,22 @@
-import React, { useState } from "react";
+import React, { useCallback, useState } from "react";
 import ProductDetails from "./ProductDetails";
 import { Button } from "antd";
 
 const OfferCardSampler = ({ product, processing }) => {
   const [isModalVisible, setIsModalVisible] = useState(false);
 
-  const showModal = () => {
+  const showModal = useCallback(() => {
     setIsModalVisible(true);
-  };
+  }, [setIsModalVisible]);
 
-  const handleCancel = () => {
+  const handleCancel = useCallback(() => {
     setIsModalVisible(false);
-  };
+  }, [setIsModalVisible]);
+
   return (
     <div className=" bg-white  rounded-md shadow-md overflow-hidden hover:shadow-xl border border-gray-200  transition-shadow flex flex-col justify-between">
       {/* Product Image */}
-      <div className=" flex justify-center  h-[400px] w-full overflow-hidden">
+      <div className=" flex justify-center  h-56 aspect-square w-full overflow-hidden">
         <img
           src={product?.product?.images?.[0]}
           alt={product?.product?.name}
@@ -78,7 +79,7 @@ const OfferCardSampler = ({ product, processing }) => {
       <div className="  p-2 ">
         {product?.userOffer ? (
           <Button
-            className={` !w-full  !font-medium !text-sm !py-4 !bg-blue-100 !cursor-not-allowed`}
+            className={`w-full! font-medium! text-sm! py-4! bg-blue-100! cursor-not-allowed!`}
           >
             {product?.userOffer?.status}
           </Button>
@@ -87,12 +88,12 @@ const OfferCardSampler = ({ product, processing }) => {
             {!processing && (
               <Button
                 onClick={showModal}
-                className={` !w-full  !font-medium !text-sm !py-4 ${product?.status === "Active"
-                  ? "!text-white !bg-blue-500 !cursor-pointer"
+                className={`w-full! font-medium! text-sm! py-4! ${product?.status === "Active"
+                  ? "text-white! bg-blue-500! cursor-pointer!"
                   : product?.status === "Scheduled"
-                    ? "!cursor-not-allowed !text-black !py-6"
-                    : "!text-white !bg-blue-500 "
-                  } ${processing && "!cursor-not-allowed !text-black "}`}
+                    ? "cursor-not-allowed! text-black! py-6!"
+                    : "text-white! bg-blue-500!"
+                  } ${processing && "cursor-not-allowed! text-black!"}`}
                 disabled={product.status === "Scheduled" || processing}
               >
                 {product.status === "Active" ? (
@@ -125,4 +126,4 @@ const OfferCardSampler = ({ product, processing }) => {
   );
 };
 
-export default OfferCardSampler;
+export default React.memo(OfferCardSampler);

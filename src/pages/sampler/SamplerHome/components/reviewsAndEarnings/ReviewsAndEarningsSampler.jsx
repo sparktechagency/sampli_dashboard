@@ -121,7 +121,7 @@ const ReviewsAndEarningsSampler = () => {
           ) : (
             <div
               key="noOffers"
-              className="text-center flex flex-col items-center justify-center py-10 w-full h-[30vh]"
+              className="text-center flex flex-col border rounded-3xl border-gray-200 items-center justify-center py-10 w-full h-[30vh]"
             >
               <p className="font-bold text-xl">No Reviews & Earnings Yet</p>
               <p className="mt-5 text-gray-500 max-w-[400px] w-full">

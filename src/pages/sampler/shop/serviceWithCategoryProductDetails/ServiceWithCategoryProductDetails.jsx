@@ -69,8 +69,6 @@ const ServiceWithCategoryProductDetails = () => {
     );
   }
 
-  const reviewsPerPage = 5;
-
   const onReviewPageChange = (page) => {
     setReviewPage(page);
   };

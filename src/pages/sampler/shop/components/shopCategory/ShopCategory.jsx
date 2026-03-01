@@ -57,10 +57,10 @@ const CategoryCarousel = () => {
               ))
               : categories?.map((category, index) => (
                 <Link
-                  to={`/sampler/shop/${category._id}/${category.name}`}
+                  to={`/sampler/shop/${category?._id}/${category?.name}`}
                   key={index}
                   className="p-2"
-                  state={{ categoryId: category.id }}
+                  state={{ categoryId: category?.id }}
                 >
                   <div className="flex flex-col items-center">
                     <div
@@ -74,13 +74,13 @@ const CategoryCarousel = () => {
                       p-4 border-gray-300 rounded-full cursor-pointer transition"
                     >
                       <img
-                        src={category.category_image}
-                        alt={category.name}
-                        className="w-52 h-52 bg-transparent rounded-full mx-auto  object-cover object-center"
+                        src={category?.category_image}
+                        alt={category?.name}
+                        className="w-24 aspect-square h-24 bg-transparent mx-auto object-cover"
                       />
                     </div>
-                    <p className="text-sm text-black font-medium !mt-5 text-center">
-                      {category.name}
+                    <p className="text-sm uppercase line-clamp-1 font-semibold text-gray-400 mt-5! text-center">
+                      {category?.name}
                     </p>
                   </div>
                 </Link>

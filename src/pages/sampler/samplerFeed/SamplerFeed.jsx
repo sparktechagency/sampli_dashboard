@@ -341,8 +341,8 @@ const SamplerFeed = () => {
               {(isFetching ||
                 loading ||
                 reviewList?.data?.data?.meta?.total > reviewLimit) && (
-                <CustomSkeleton isHeight={false} />
-              )}
+                  <CustomSkeleton isHeight={false} />
+                )}
             </div>
           </div>
           {/* Right side */}
